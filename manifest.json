@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "AI文本解释助手",
+  "version": "1.0.0",
+  "description": "在AI对话页面框选文本，快速调用大模型API解释选中内容",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "options.html",
+    "default_title": "AI文本解释助手设置"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["popup.html", "popup.js", "popup.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

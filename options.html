@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI文本解释助手 - 设置</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="logo">🤖</div>
+            <h1>AI文本解释助手</h1>
+            <p class="subtitle">配置您的AI服务</p>
+        </div>
+
+        <!-- 设置表单 -->
+        <div class="settings-form">
+            <!-- API提供商选择 -->
+            <div class="form-group">
+                <label for="apiProvider">
+                    <span class="label-text">AI 服务提供商</span>
+                    <span class="label-desc">选择您要使用的AI服务</span>
+                </label>
+                <select id="apiProvider" class="form-select">
+                    <option value="openai">OpenAI (ChatGPT)</option>
+                    <option value="deepseek">DeepSeek</option>
+                    <option value="doubao">豆包 (火山引擎)</option>
+                </select>
+            </div>
+
+            <!-- API Key输入 -->
+            <div class="form-group">
+                <label for="apiKey">
+                    <span class="label-text">API Key</span>
+                    <span class="label-desc">您的API密钥，将安全保存在本地</span>
+                </label>
+                <div class="input-group">
+                    <input 
+                        type="password" 
+                        id="apiKey" 
+                        class="form-input" 
+                        placeholder="请输入您的API Key"
+                    >
+                    <button type="button" id="toggleApiKey" class="toggle-btn" title="显示/隐藏">
+                        👁️
+                    </button>
+                </div>
+                <p class="help-text" id="apiKeyHelp">
+                    在OpenAI平台获取: <a href="https://platform.openai.com/api-keys" target="_blank">https://platform.openai.com/api-keys</a>
+                </p>
+            </div>
+
+            <!-- 模型选择 -->
+            <div class="form-group">
+                <label for="apiModel">
+                    <span class="label-text">模型</span>
+                    <span class="label-desc">选择要使用的AI模型</span>
+                </label>
+                <select id="apiModel" class="form-select">
+                    <!-- OpenAI模型 -->
+                    <optgroup label="OpenAI" id="openaiModels">
+                        <option value="gpt-4o">GPT-4o</option>
+                        <option value="gpt-4o-mini">GPT-4o Mini</option>
+                        <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                        <option value="gpt-3.5-turbo" selected>GPT-3.5 Turbo</option>
+                    </optgroup>
+                    <!-- DeepSeek模型 -->
+                    <optgroup label="DeepSeek" id="deepseekModels" style="display: none;">
+                        <option value="deepseek-chat">DeepSeek Chat</option>
+                        <option value="deepseek-coder">DeepSeek Coder</option>
+                    </optgroup>
+                    <!-- 豆包模型 -->
+                    <optgroup label="豆包" id="doubaoModels" style="display: none;">
+                        <option value="ep-20241201123456-xxxxx">Doubao Pro (请填入实际Endpoint)</option>
+                        <option value="ep-20241201123457-yyyyy">Doubao Lite (请填入实际Endpoint)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- 温度设置 -->
+            <div class="form-group">
+                <label for="temperature">
+                    <span class="label-text">温度 (Temperature)</span>
+                    <span class="label-desc">控制回答的创造性，值越高越随机</span>
+                </label>
+                <div class="slider-container">
+                    <input 
+                        type="range" 
+                        id="temperature" 
+                        class="form-slider" 
+                        min="0" 
+                        max="1" 
+                        step="0.1" 
+                        value="0.7"
+                    >
+                    <span id="temperatureValue" class="slider-value">0.7</span>
+                </div>
+            </div>
+
+            <!-- 最大Token数 -->
+            <div class="form-group">
+                <label for="maxTokens">
+                    <span class="label-text">最大Token数</span>
+                    <span class="label-desc">限制回答的最大长度</span>
+                </label>
+                <input 
+                    type="number" 
+                    id="maxTokens" 
+                    class="form-input" 
+                    min="100" 
+                    max="4000" 
+                    value="2000"
+                >
+            </div>
+
+            <!-- 保存按钮 -->
+            <div class="button-group">
+                <button id="saveBtn" class="btn btn-primary">
+                    💾 保存配置
+                </button>
+                <button id="testBtn" class="btn btn-secondary">
+                    🧪 测试连接
+                </button>
+            </div>
+
+            <!-- 状态消息 -->
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="instructions">
+            <h2>📖 使用说明</h2>
+            <div class="instruction-item">
+                <h3>1. 获取API Key</h3>
+                <ul>
+                    <li><strong>OpenAI:</strong> 访问 <a href="https://platform.openai.com/api-keys" target="_blank">https://platform.openai.com/api-keys</a></li>
+                    <li><strong>DeepSeek:</strong> 访问 <a href="https://platform.deepseek.com/" target="_blank">https://platform.deepseek.com/</a></li>
+                    <li><strong>豆包:</strong> 访问 <a href="https://console.volcengine.com/ark" target="_blank">https://console.volcengine.com/ark</a></li>
+                </ul>
+            </div>
+            <div class="instruction-item">
+                <h3>2. 使用插件</h3>
+                <ol>
+                    <li>在支持的AI对话页面（豆包、DeepSeek等）</li>
+                    <li>用鼠标框选想要解释的文本</li>
+                    <li>点击旁边出现的🤖图标</li>
+                    <li>等待AI解释结果在弹窗中显示</li>
+                </ol>
+            </div>
+            <div class="instruction-item">
+                <h3>3. 注意事项</h3>
+                <ul>
+                    <li>API Key仅保存在您的浏览器本地，不会上传到任何服务器</li>
+                    <li>每次解释会消耗您的API额度，请注意使用</li>
+                    <li>建议使用GPT-3.5或DeepSeek Chat以节省成本</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>AI文本解释助手 v1.0.0</p>
+            <p>您的数据安全是我们的首要任务</p>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

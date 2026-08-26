@@ -1,0 +1,73 @@
+/* AI文本解释助手 - 内容样式表 */
+
+/* 滚动条样式优化 */
+#ai-explain-popup::-webkit-scrollbar,
+#ai-explain-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#ai-explain-popup::-webkit-scrollbar-track,
+#ai-explain-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#ai-explain-popup::-webkit-scrollbar-thumb,
+#ai-explain-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#ai-explain-popup::-webkit-scrollbar-thumb:hover,
+#ai-explain-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 代码块样式优化 */
+#ai-explain-content pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+#ai-explain-content code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+}
+
+/* 防止弹窗被页面样式影响 */
+#ai-explain-popup * {
+    box-sizing: border-box;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#ai-explain-popup {
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#ai-explain-icon {
+    animation: bounceIn 0.3s ease-out;
+}
